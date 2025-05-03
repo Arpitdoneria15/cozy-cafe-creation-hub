@@ -104,4 +104,42 @@
   .cafe-button-secondary {
     @apply bg-cafe-cream text-cafe-dark border border-cafe-medium hover:bg-cafe-light;
   }
+  
+  .image-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-black/70 to-transparent;
+  }
+  
+  .animate-slow-spin {
+    animation: slow-spin 15s linear infinite;
+  }
+  
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+  
+  .cafe-card {
+    @apply bg-white rounded-lg shadow-md p-6 transition-all duration-300 hover:shadow-xl;
+  }
+}
+
+@keyframes slow-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
 }
