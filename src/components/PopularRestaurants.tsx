@@ -1,136 +1,176 @@
 
-import React from "react";
-import { useCart } from "@/contexts/CartContext";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Star, Clock, MapPin, ShoppingCart } from "lucide-react";
-import { formatPrice } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
+import { Star, Clock, MapPin, Heart } from "lucide-react";
+import BookingModal from "./BookingModal";
 
 const restaurants = [
   {
-    id: "rest-1",
-    name: "Spice Garden",
-    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    cuisine: "North Indian",
-    rating: 4.5,
-    deliveryTime: "25-30 min",
-    location: "Bandra West",
-    discount: "30% OFF",
-    featured: "Butter Chicken",
-    price: 350,
-    category: "Restaurants"
-  },
-  {
-    id: "rest-2",
-    name: "Blue Tokai Coffee",
-    image: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    cuisine: "Coffee & Beverages",
-    rating: 4.7,
-    deliveryTime: "15-20 min",
-    location: "Powai",
-    discount: "Buy 1 Get 1",
-    featured: "Cold Brew",
-    price: 250,
-    category: "Coffee"
-  },
-  {
-    id: "rest-3",
+    id: 1,
     name: "Trishna",
-    image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    cuisine: "Seafood",
+    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    cuisine: "Seafood, Indian",
     rating: 4.8,
-    deliveryTime: "35-40 min",
-    location: "Fort",
-    discount: "20% OFF",
-    featured: "Koliwada Prawns",
-    price: 450,
-    category: "Restaurants"
+    deliveryTime: "25-30 mins",
+    location: "Fort, Mumbai",
+    price: "₹1200 for two",
+    offer: "20% OFF",
+    isVeg: false,
+    tags: ["Trending", "Premium"]
   },
   {
-    id: "rest-4",
-    name: "Social",
+    id: 2,
+    name: "The Table",
+    image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    cuisine: "European, Continental",
+    rating: 4.7,
+    deliveryTime: "35-40 mins", 
+    location: "Colaba, Mumbai",
+    price: "₹2000 for two",
+    offer: "15% OFF",
+    isVeg: false,
+    tags: ["Fine Dining", "Romantic"]
+  },
+  {
+    id: 3,
+    name: "Britannia & Co.",
     image: "https://images.unsplash.com/photo-1551218808-94e220e084d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    cuisine: "Continental",
-    rating: 4.4,
-    deliveryTime: "30-35 min",
-    location: "Lower Parel",
-    discount: "Happy Hours",
-    featured: "LIIT",
-    price: 600,
-    category: "Bars"
+    cuisine: "Parsi, Iranian",
+    rating: 4.6,
+    deliveryTime: "20-25 mins",
+    location: "Ballard Estate, Mumbai", 
+    price: "₹800 for two",
+    offer: "25% OFF",
+    isVeg: false,
+    tags: ["Heritage", "Authentic"]
+  },
+  {
+    id: 4,
+    name: "Shree Thaker Bhojanalay",
+    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    cuisine: "Gujarati, Thali",
+    rating: 4.5,
+    deliveryTime: "15-20 mins",
+    location: "Kalbadevi, Mumbai",
+    price: "₹600 for two", 
+    offer: "30% OFF",
+    isVeg: true,
+    tags: ["Pure Veg", "Traditional"]
   }
 ];
 
 const PopularRestaurants = () => {
-  const { addToCart } = useCart();
+  const [bookingModal, setBookingModal] = useState({ isOpen: false, restaurantName: "" });
+
+  const handleBookNow = (restaurantName: string) => {
+    setBookingModal({ isOpen: true, restaurantName });
+  };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-orange-50">
-      <div className="cafe-container">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
-            Popular Near You
-          </h2>
-          <p className="text-xl text-gray-600">
-            Trending restaurants and cafes in your area
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {restaurants.map((restaurant) => (
-            <div
-              key={restaurant.id}
-              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
-            >
-              <div className="relative">
-                <img
-                  src={restaurant.image}
-                  alt={restaurant.name}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="absolute top-3 left-3 bg-gradient-to-r from-orange-500 to-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                  {restaurant.discount}
+    <>
+      <section className="py-20 bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
+        <div className="cafe-container">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-amber-900">
+              Popular Restaurants
+            </h2>
+            <p className="text-xl text-amber-700 max-w-2xl mx-auto">
+              Discover the most loved dining spots in your city
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+            {restaurants.map((restaurant) => (
+              <div
+                key={restaurant.id}
+                className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group"
+              >
+                <div className="relative">
+                  <img
+                    src={restaurant.image}
+                    alt={restaurant.name}
+                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <Badge className="bg-orange-500 hover:bg-orange-600">
+                      {restaurant.offer}
+                    </Badge>
+                  </div>
+                  <button className="absolute top-4 right-4 bg-white/80 hover:bg-white rounded-full p-2 transition-colors">
+                    <Heart className="h-5 w-5 text-red-500" />
+                  </button>
+                  {restaurant.isVeg && (
+                    <div className="absolute bottom-4 left-4">
+                      <div className="bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium">
+                        Pure Veg
+                      </div>
+                    </div>
+                  )}
                 </div>
-                <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 flex items-center gap-1">
-                  <Star className="h-4 w-4 text-yellow-500 fill-current" />
-                  <span className="text-sm font-medium">{restaurant.rating}</span>
+                
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-xl font-bold text-amber-900">{restaurant.name}</h3>
+                    <div className="flex items-center gap-1">
+                      <Star className="h-4 w-4 text-yellow-500 fill-current" />
+                      <span className="text-sm font-medium text-amber-800">{restaurant.rating}</span>
+                    </div>
+                  </div>
+                  
+                  <p className="text-amber-600 mb-2">{restaurant.cuisine}</p>
+                  
+                  <div className="flex items-center gap-4 mb-3 text-sm text-amber-700">
+                    <div className="flex items-center gap-1">
+                      <Clock className="h-4 w-4" />
+                      <span>{restaurant.deliveryTime}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <MapPin className="h-4 w-4" />
+                      <span>{restaurant.location}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-2 mb-4">
+                    {restaurant.tags.map((tag) => (
+                      <Badge key={tag} variant="secondary" className="text-xs bg-amber-100 text-amber-800">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <span className="text-lg font-bold text-amber-900">{restaurant.price}</span>
+                    <div className="flex gap-2">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        className="border-amber-300 text-amber-700 hover:bg-amber-50"
+                      >
+                        Order Now
+                      </Button>
+                      <Button 
+                        size="sm"
+                        onClick={() => handleBookNow(restaurant.name)}
+                        className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700"
+                      >
+                        Book Table
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               </div>
-              
-              <div className="p-5">
-                <h3 className="text-xl font-bold mb-2 text-gray-900">{restaurant.name}</h3>
-                <p className="text-gray-600 mb-3">{restaurant.cuisine}</p>
-                
-                <div className="flex items-center gap-4 mb-4 text-sm text-gray-500">
-                  <div className="flex items-center gap-1">
-                    <Clock className="h-4 w-4" />
-                    <span>{restaurant.deliveryTime}</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <MapPin className="h-4 w-4" />
-                    <span>{restaurant.location}</span>
-                  </div>
-                </div>
-                
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <p className="text-sm text-gray-600">Popular: {restaurant.featured}</p>
-                    <p className="text-lg font-bold text-orange-600">{formatPrice(restaurant.price)}</p>
-                  </div>
-                </div>
-                
-                <Button
-                  onClick={() => addToCart(restaurant)}
-                  className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white"
-                >
-                  <ShoppingCart className="mr-2 h-4 w-4" />
-                  Add to Cart
-                </Button>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <BookingModal 
+        isOpen={bookingModal.isOpen} 
+        onClose={() => setBookingModal({ isOpen: false, restaurantName: "" })} 
+        restaurantName={bookingModal.restaurantName}
+      />
+    </>
   );
 };
 

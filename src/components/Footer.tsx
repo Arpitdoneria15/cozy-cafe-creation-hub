@@ -1,25 +1,30 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { Clock, MapPin, Phone, Mail } from "lucide-react";
+import { Clock, MapPin, Phone, Mail, Coffee } from "lucide-react";
 
 const Footer = () => {
+  const selectedCity = localStorage.getItem("selectedCity") || "Mumbai";
+
   return (
-    <footer className="bg-cafe-dark text-white pt-16">
+    <footer className="bg-gradient-to-br from-amber-900 via-orange-900 to-red-900 text-white pt-16">
       <div className="cafe-container">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* About Column */}
           <div>
-            <h3 className="text-xl font-playfair font-bold mb-4">Café<span className="text-cafe-accent">6</span></h3>
-            <p className="text-cafe-cream opacity-90 mb-6">
-              A cozy place where every cup tells a story and every bite creates a memory.
+            <div className="flex items-center gap-2 mb-4">
+              <Coffee className="h-8 w-8 text-amber-300" />
+              <h3 className="text-2xl font-playfair font-bold">Taste<span className="text-amber-300">Hub</span></h3>
+            </div>
+            <p className="text-amber-100 opacity-90 mb-6">
+              Connecting food lovers with the best restaurants, cafes, and dining experiences across India.
             </p>
             <div className="flex space-x-4">
               <a 
                 href="https://facebook.com" 
                 target="_blank" 
                 rel="noreferrer" 
-                className="bg-cafe-medium hover:bg-cafe-accent rounded-full p-2 transition-colors"
+                className="bg-amber-800 hover:bg-amber-700 rounded-full p-2 transition-colors"
                 aria-label="Follow us on Facebook"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -30,7 +35,7 @@ const Footer = () => {
                 href="https://instagram.com" 
                 target="_blank" 
                 rel="noreferrer" 
-                className="bg-cafe-medium hover:bg-cafe-accent rounded-full p-2 transition-colors"
+                className="bg-amber-800 hover:bg-amber-700 rounded-full p-2 transition-colors"
                 aria-label="Follow us on Instagram"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -41,7 +46,7 @@ const Footer = () => {
                 href="https://twitter.com" 
                 target="_blank" 
                 rel="noreferrer" 
-                className="bg-cafe-medium hover:bg-cafe-accent rounded-full p-2 transition-colors"
+                className="bg-amber-800 hover:bg-amber-700 rounded-full p-2 transition-colors"
                 aria-label="Follow us on Twitter"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -51,29 +56,29 @@ const Footer = () => {
             </div>
           </div>
           
-          {/* Opening Hours Column */}
+          {/* Services Column */}
           <div>
-            <h3 className="text-lg font-bold mb-4">Opening Hours</h3>
+            <h3 className="text-lg font-bold mb-4 text-amber-200">Our Services</h3>
             <ul className="space-y-3">
               <li className="flex items-start">
-                <Clock className="mr-2 h-5 w-5 text-cafe-accent" />
+                <Coffee className="mr-2 h-5 w-5 text-amber-300" />
                 <div>
-                  <p className="font-medium">Monday - Friday</p>
-                  <p className="text-cafe-cream opacity-90">7:00 AM - 8:00 PM</p>
+                  <p className="font-medium">Food Delivery</p>
+                  <p className="text-amber-100 opacity-90 text-sm">Order from 500+ restaurants</p>
                 </div>
               </li>
               <li className="flex items-start">
-                <Clock className="mr-2 h-5 w-5 text-cafe-accent" />
+                <Clock className="mr-2 h-5 w-5 text-amber-300" />
                 <div>
-                  <p className="font-medium">Saturday</p>
-                  <p className="text-cafe-cream opacity-90">8:00 AM - 9:00 PM</p>
+                  <p className="font-medium">Table Booking</p>
+                  <p className="text-amber-100 opacity-90 text-sm">Reserve your favorite spots</p>
                 </div>
               </li>
               <li className="flex items-start">
-                <Clock className="mr-2 h-5 w-5 text-cafe-accent" />
+                <MapPin className="mr-2 h-5 w-5 text-amber-300" />
                 <div>
-                  <p className="font-medium">Sunday</p>
-                  <p className="text-cafe-cream opacity-90">9:00 AM - 7:00 PM</p>
+                  <p className="font-medium">Live Tracking</p>
+                  <p className="text-amber-100 opacity-90 text-sm">Track your order in real-time</p>
                 </div>
               </li>
             </ul>
@@ -81,54 +86,54 @@ const Footer = () => {
           
           {/* Contact Column */}
           <div>
-            <h3 className="text-lg font-bold mb-4">Contact Us</h3>
+            <h3 className="text-lg font-bold mb-4 text-amber-200">Contact Us</h3>
             <ul className="space-y-3">
               <li className="flex items-start">
-                <MapPin className="mr-2 h-5 w-5 text-cafe-accent" />
-                <p className="text-cafe-cream opacity-90">123 Coffee Street, Brew City, BC 10101</p>
+                <MapPin className="mr-2 h-5 w-5 text-amber-300" />
+                <p className="text-amber-100 opacity-90">Currently serving in {selectedCity}</p>
               </li>
               <li className="flex items-start">
-                <Phone className="mr-2 h-5 w-5 text-cafe-accent" />
-                <p className="text-cafe-cream opacity-90">(555) 123-4567</p>
+                <Phone className="mr-2 h-5 w-5 text-amber-300" />
+                <p className="text-amber-100 opacity-90">+91 98765 43210</p>
               </li>
               <li className="flex items-start">
-                <Mail className="mr-2 h-5 w-5 text-cafe-accent" />
-                <p className="text-cafe-cream opacity-90">info@cafe6.com</p>
+                <Mail className="mr-2 h-5 w-5 text-amber-300" />
+                <p className="text-amber-100 opacity-90">hello@tastehub.in</p>
               </li>
             </ul>
           </div>
           
           {/* Quick Links Column */}
           <div>
-            <h3 className="text-lg font-bold mb-4">Quick Links</h3>
+            <h3 className="text-lg font-bold mb-4 text-amber-200">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="text-cafe-cream opacity-90 hover:text-cafe-accent hover:opacity-100 transition-colors">
+                <Link to="/home" className="text-amber-100 opacity-90 hover:text-amber-300 hover:opacity-100 transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/menu" className="text-cafe-cream opacity-90 hover:text-cafe-accent hover:opacity-100 transition-colors">
-                  Our Menu
+                <Link to="/menu" className="text-amber-100 opacity-90 hover:text-amber-300 hover:opacity-100 transition-colors">
+                  Restaurants
                 </Link>
               </li>
               <li>
-                <Link to="/gallery" className="text-cafe-cream opacity-90 hover:text-cafe-accent hover:opacity-100 transition-colors">
+                <Link to="/gallery" className="text-amber-100 opacity-90 hover:text-amber-300 hover:opacity-100 transition-colors">
                   Gallery
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-cafe-cream opacity-90 hover:text-cafe-accent hover:opacity-100 transition-colors">
+                <Link to="/contact" className="text-amber-100 opacity-90 hover:text-amber-300 hover:opacity-100 transition-colors">
                   Contact
                 </Link>
               </li>
               <li>
-                <a href="#" className="text-cafe-cream opacity-90 hover:text-cafe-accent hover:opacity-100 transition-colors">
+                <a href="#" className="text-amber-100 opacity-90 hover:text-amber-300 hover:opacity-100 transition-colors">
                   Privacy Policy
                 </a>
               </li>
               <li>
-                <a href="#" className="text-cafe-cream opacity-90 hover:text-cafe-accent hover:opacity-100 transition-colors">
+                <a href="#" className="text-amber-100 opacity-90 hover:text-amber-300 hover:opacity-100 transition-colors">
                   Terms of Service
                 </a>
               </li>
@@ -138,10 +143,10 @@ const Footer = () => {
       </div>
       
       {/* Copyright Bar */}
-      <div className="py-4 border-t border-cafe-medium border-opacity-30">
+      <div className="py-4 border-t border-amber-800 border-opacity-30">
         <div className="cafe-container text-center">
-          <p className="text-cafe-cream opacity-80 text-sm">
-            © {new Date().getFullYear()} Café6. All rights reserved.
+          <p className="text-amber-200 opacity-80 text-sm">
+            © {new Date().getFullYear()} TasteHub. All rights reserved. | Made with ❤️ for food lovers
           </p>
         </div>
       </div>
