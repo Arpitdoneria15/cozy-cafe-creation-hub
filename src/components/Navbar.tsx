@@ -30,6 +30,11 @@ const Navbar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  // Don't show navbar on home page to match the app design
+  if (window.location.pathname === '/home') {
+    return null;
+  }
+
   return (
     <header
       className={`fixed w-full z-50 transition-all duration-300 ${
