@@ -3,14 +3,13 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Menu, X } from "lucide-react";
+import { ShoppingCart, Menu, X, MapPin, User } from "lucide-react";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { toggleCart, totalItems } = useCart();
 
-  // Detect scroll to change navbar style
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -34,28 +33,36 @@ const Navbar = () => {
     <header
       className={`fixed w-full z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white shadow-md py-2"
+          ? "bg-white/95 backdrop-blur-md shadow-lg py-2"
           : "bg-transparent py-4"
       }`}
     >
       <div className="cafe-container flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center">
-          <span className="text-2xl font-bold font-playfair text-cafe-dark">Café<span className="text-cafe-accent">6</span></span>
+          <span className="text-3xl font-bold font-playfair">
+            Taste<span className="text-orange-500">Hub</span>
+          </span>
         </Link>
+
+        {/* Location */}
+        <div className="hidden md:flex items-center gap-2 text-sm">
+          <MapPin className="h-4 w-4 text-orange-500" />
+          <span className="text-gray-700">Mumbai, Maharashtra</span>
+        </div>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <Link to="/" className="text-cafe-dark hover:text-cafe-accent font-medium transition-colors">
+          <Link to="/" className="text-gray-700 hover:text-orange-500 font-medium transition-colors">
             Home
           </Link>
-          <Link to="/menu" className="text-cafe-dark hover:text-cafe-accent font-medium transition-colors">
+          <Link to="/menu" className="text-gray-700 hover:text-orange-500 font-medium transition-colors">
             Menu
           </Link>
-          <Link to="/gallery" className="text-cafe-dark hover:text-cafe-accent font-medium transition-colors">
-            Gallery
+          <Link to="/gallery" className="text-gray-700 hover:text-orange-500 font-medium transition-colors">
+            Restaurants
           </Link>
-          <Link to="/contact" className="text-cafe-dark hover:text-cafe-accent font-medium transition-colors">
+          <Link to="/contact" className="text-gray-700 hover:text-orange-500 font-medium transition-colors">
             Contact
           </Link>
         </nav>
@@ -64,7 +71,7 @@ const Navbar = () => {
         <div className="flex items-center md:hidden">
           <button
             onClick={toggleMobileMenu}
-            className="text-cafe-dark p-2"
+            className="text-gray-700 p-2"
             aria-label="Toggle mobile menu"
           >
             {isMobileMenuOpen ? (
@@ -75,55 +82,56 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Cart & Book Table Button */}
+        {/* Cart & Profile */}
         <div className="hidden md:flex items-center space-x-4">
           <Button 
             onClick={toggleCart}
             variant="outline" 
-            className="relative"
+            className="relative border-orange-200 hover:bg-orange-50"
             aria-label="Open cart"
           >
             <ShoppingCart className="h-5 w-5" />
             {totalItems > 0 && (
-              <span className="absolute -top-2 -right-2 bg-cafe-accent text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+              <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
                 {totalItems}
               </span>
             )}
           </Button>
-          <Button className="bg-cafe-accent hover:bg-cafe-dark text-white">
-            Book a Table
+          <Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white">
+            <User className="mr-2 h-4 w-4" />
+            Login
           </Button>
         </div>
       </div>
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white absolute top-full left-0 w-full shadow-lg animate-fade-in">
+        <div className="md:hidden bg-white/95 backdrop-blur-md absolute top-full left-0 w-full shadow-lg animate-fade-in">
           <div className="cafe-container py-4 space-y-4">
             <Link 
               to="/" 
-              className="block text-cafe-dark hover:text-cafe-accent py-2"
+              className="block text-gray-700 hover:text-orange-500 py-2"
               onClick={toggleMobileMenu}
             >
               Home
             </Link>
             <Link 
               to="/menu" 
-              className="block text-cafe-dark hover:text-cafe-accent py-2"
+              className="block text-gray-700 hover:text-orange-500 py-2"
               onClick={toggleMobileMenu}
             >
               Menu
             </Link>
             <Link 
               to="/gallery" 
-              className="block text-cafe-dark hover:text-cafe-accent py-2"
+              className="block text-gray-700 hover:text-orange-500 py-2"
               onClick={toggleMobileMenu}
             >
-              Gallery
+              Restaurants
             </Link>
             <Link 
               to="/contact" 
-              className="block text-cafe-dark hover:text-cafe-accent py-2"
+              className="block text-gray-700 hover:text-orange-500 py-2"
               onClick={toggleMobileMenu}
             >
               Contact
@@ -140,13 +148,13 @@ const Navbar = () => {
               >
                 <ShoppingCart className="h-5 w-5" />
                 {totalItems > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-cafe-accent text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                  <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
                     {totalItems}
                   </span>
                 )}
               </Button>
-              <Button className="bg-cafe-accent hover:bg-cafe-dark text-white">
-                Book a Table
+              <Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white">
+                Login
               </Button>
             </div>
           </div>

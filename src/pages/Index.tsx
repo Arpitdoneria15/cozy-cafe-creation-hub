@@ -1,24 +1,22 @@
 
 import React from "react";
 import HeroSection from "@/components/HeroSection";
-import MenuHighlights from "@/components/MenuHighlights";
-import AboutSection from "@/components/AboutSection";
-import SpecialOffers from "@/components/SpecialOffers";
-import TestimonialSlider from "@/components/TestimonialSlider";
-import ReservationSection from "@/components/ReservationSection";
-import NewsletterSubscription from "@/components/NewsletterSubscription";
+import FoodCategories from "@/components/FoodCategories";
+import PopularRestaurants from "@/components/PopularRestaurants";
+import CouplesSection from "@/components/CouplesSection";
+import OrderTracking from "@/components/OrderTracking";
+import PaymentSection from "@/components/PaymentSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-red-50 to-pink-50">
       <HeroSection />
-      <MenuHighlights />
-      <AboutSection />
-      <SpecialOffers />
-      <TestimonialSlider />
-      <ReservationSection />
-      <NewsletterSubscription />
+      <FoodCategories />
+      <PopularRestaurants />
+      <CouplesSection />
+      <OrderTracking />
+      <PaymentSection />
       <Footer />
     </div>
   );
